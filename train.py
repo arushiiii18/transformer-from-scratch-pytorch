@@ -198,8 +198,8 @@ if __name__ == "__main__":
     N = 3
     D_FF = 512
     DROPOUT = 0.1
-    BATCH_SIZE = 32
-    EPOCHS = 20
+    BATCH_SIZE = 64
+    EPOCHS = 15
     WARMUP_STEPS = 4000
 
     train_loader, val_loader, src_vocab, tgt_vocab = build_dataloaders(BATCH_SIZE)

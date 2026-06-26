@@ -61,12 +61,66 @@ no HuggingFace, no shortcuts.
 
 ---
 
-## Results (2 epochs, CPU, d_model=256, N=3)
-- Train Loss: 4.37
-- Val Loss: 3.79
-- Sample: "ein mann spielt gitarre ." → "a man playing the playing the guitar."
+## Results
 
----
+### Main Training Run (15 epochs, GPU RTX 2050, d_model=256, N=3, batch=64)
+
+| Epoch | Train Loss | Val Loss |
+|---|---|---|
+| 1  | 7.11 | 5.41 |
+| 5  | 3.40 | 3.20 |
+| 10 | 2.65 | 2.88 |
+| 12 | 2.44 | **2.84** ← best |
+| 15 | 2.19 | 2.89 |
+
+Sample translations after 15 epochs:
+
+| German | Predicted |
+|--------|-----------|
+| ein mann spielt gitarre . | a man playing a guitar |
+| eine frau läuft durch den park . | a woman is walking through the park. |
+| zwei kinder spielen im garten . | two children play in the garden. |
+| ein hund rennt über das feld . | a dog runs through the field. |
+
+### Ablation Studies (3 epochs each, GPU)
+
+**Attention Heads** (d_model=256, N=3, d_ff=512):
+
+| Heads | Val Loss |
+|-------|----------|
+| 1 | 3.740 |
+| 2 | 3.751 |
+| 4 | 3.778 |
+| 8 | 3.828 |
+
+Insight: fewer heads converge faster at 3 epochs. h=8 requires more training
+to leverage specialization — consistent with our 15-epoch run where h=8 reached 2.84.
+
+**Number of Layers** (d_model=256, h=8, d_ff=512):
+
+| N | Val Loss |
+|---|----------|
+| 1 | 3.630 |
+| 2 | 3.653 |
+| 3 | 3.816 |
+| 6 | 4.316 |
+
+Insight: deeper models are harder to optimize early. N=6 (paper's choice)
+needs significantly more epochs and warmup to converge — the paper trained
+for 100k+ steps with a much larger warmup.
+
+**FFN Size** (d_model=256, h=8, N=3):
+
+| d_ff | Val Loss |
+|------|----------|
+| 256  | 3.846 |
+| 512  | 3.793 |
+| 1024 | 3.754 |
+| 2048 | 3.695 |
+
+Insight: larger FFN consistently improves performance even at 3 epochs.
+The FFN is where the model stores factual knowledge — more capacity helps.
+Paper uses d_ff=2048 (4x d_model=512), which our results validate.
 
 ## References
 - Vaswani et al., "Attention Is All You Need", 2017

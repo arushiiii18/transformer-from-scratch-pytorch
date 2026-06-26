@@ -92,7 +92,7 @@ if __name__ == "__main__":
         "ein hund rennt über das feld .",
     ]
 
-    print("Translations (2 epochs of training — not perfect, directionally correct):\n")
+    print("Translations (15 epochs, GPU, val loss 2.84):\n")
     for sentence in test_sentences:
         translation = translate(sentence, model, src_vocab, tgt_vocab, device)
         print(f"DE: {sentence}")

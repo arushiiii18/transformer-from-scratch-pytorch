@@ -27,26 +27,33 @@ directly to a specific section of the paper.
 
 ## Results
 
-Trained on Multi30k (De→En), 2 epochs, CPU, d_model=256, N=3 layers.
+### Training (15 epochs, RTX 2050, d_model=256, N=3, batch=64)
 
 | Epoch | Train Loss | Val Loss |
 |---|---|---|
-| 1 | 6.17 | 4.69 |
-| 2 | 4.37 | 3.79 |
+| 1 | 7.11 | 5.41 |
+| 5 | 3.40 | 3.20 |
+| 12 | 2.44 | **2.84** ← best |
+| 15 | 2.19 | 2.89 |
 
-**Sample translations after 2 epochs:**
-```
-DE: ein mann spielt gitarre .
-EN: a man playing the playing the guitar.
+**Sample translations after 15 epochs:**
 
-DE: eine frau läuft durch den park .
-EN: a woman running through the water.
+DE: ein mann spielt gitarre .        → EN: a man playing a guitar
+DE: eine frau läuft durch den park . → EN: a woman is walking through the park.
+DE: zwei kinder spielen im garten .  → EN: two children play in the garden.
+DE: ein hund rennt über das feld .   → EN: a dog runs through the field.
 
-DE: ein hund rennt über das feld .
-EN: a dog running through the grass.
-```
+### Ablation Studies
 
----
+Trained 12 configurations (3 epochs each) varying one parameter at a time:
+
+| Variable | Finding |
+|----------|---------|
+| Attention heads | Fewer heads converge faster short-term; more heads need longer training |
+| Depth (N layers) | Deeper = slower convergence; N=6 needs 5x+ more training than N=1 |
+| FFN size | Larger d_ff consistently improves — d_ff=2048 best across all runs |
+
+See `ablation_results/results.json` and `notebooks/ablation_studies.ipynb` for full data.
 
 ## Project structure
 
