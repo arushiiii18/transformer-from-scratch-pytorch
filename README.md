@@ -1,12 +1,16 @@
-# Transformer from Scratch
+# Transformer from Scratch using Pytorch
 
 A complete, paper-accurate implementation of the Transformer architecture
 from ["Attention Is All You Need"](https://arxiv.org/abs/1706.03762) (Vaswani et al., 2017).
 
-Built in PyTorch with no HuggingFace dependencies. Every component traces
-directly to a specific section of the paper.
+> Built from scratch in PyTorch. No HuggingFace. No `torch.nn.Transformer`. Every module implemented manually from the paper.
 
 ---
+## Motivation
+
+This project was built to understand the Transformer architecture from first principles by implementing every component described in the original paper : without relying on high-level libraries such as HuggingFace or PyTorch's built-in Transformer modules.
+
+Reading "Attention Is All You Need" raised more questions than it answered. Building it resolved them.
 
 ## What's implemented
 
@@ -148,6 +152,14 @@ with it. Two different jobs — both necessary.
 See `NOTES.md` for full implementation reasoning.
 
 ---
+
+## What I Learned
+
+- Attention already existed before Transformers — the novelty was making it the primary computational mechanism, not an add-on to RNNs.
+- Multi-head attention isn't repetition — each head specializes in different linguistic relationships simultaneously.
+- Feed-forward layers have a distinct job from attention: attention decides *what* to gather, FFN decides *what to do* with it.
+- Positional encodings exist specifically because removing recurrence broke the model's only way of knowing word order — every design choice creates a new problem.
+- Ablation studies showed why each component exists rather than assuming design choices were arbitrary.
 
 ## References
 
