@@ -55,6 +55,17 @@ Trained 12 configurations (3 epochs each) varying one parameter at a time:
 
 See `ablation_results/results.json` and `notebooks/ablation_studies.ipynb` for full data.
 
+## Visualizations
+
+### Positional Encoding
+![Positional Encoding](positional_encoding.png)
+
+### Attention Maps (Cross-Attention, Last Decoder Layer)
+![Attention Maps](attention_maps.png)
+
+### Ablation Studies
+![Ablation Studies](ablation_plots.png)
+
 ## Project structure
 
 ```
