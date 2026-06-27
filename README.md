@@ -65,6 +65,14 @@ Trained 12 configurations (3 epochs each) varying one parameter at a time:
 
 See `ablation_results/results.json` and `notebooks/ablation_studies.ipynb` for full data.
 
+## BLEU METRICS
+
+| Metric | Score |
+|--------|-------|
+| Val Loss (best) | 2.84 (epoch 12) |
+| BLEU — Greedy | 34.08 |
+| BLEU — Beam Search (k=4) | 35.25 |
+
 ## Visualizations
 
 ### Training Curves
