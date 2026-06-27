@@ -1,7 +1,7 @@
 # Transformer from Scratch in Pytorch
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.6-orange)
-![Tests](https://img.shields.io/badge/Tests-12%20passed-brightgreen)
+![Tests](https://img.shields.io/badge/Tests-13%20passed-brightgreen)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 A complete, paper-accurate implementation of the Transformer architecture
